@@ -1,0 +1,297 @@
+%
+% Sablona pro psani posudku bakalarskych praci (oboru Informatika na MFF UK)
+% ==========================================================================
+%
+% Tento soubor je siren pod licenci Apache, verze 2.0 (viz soubor LICENSE).
+% This file is distributed under Apache License, ver. 2.0 (see file LICENSE).
+%
+% Aktualni verzi tohoto souboru najdete na teto webove strance:
+% https://github.com/D-iii-S/bc-review-form
+% 
+% Tento soubor je pripraven v kodovani UTF-8. V pripade, ze vas system
+% toto kodovani nepodporuje, muzete jej zmenit v ramci nacitani balicku
+% inputenc nize. Nezapomente ale v takovem pripade zkontrolovat, ze se
+% v poradku vysazi vsechny polozky s hacky a carky (komentare jsou z
+% duvodu archaicke kompatibility zatim udrzovany bez hacku a carek).
+%
+% Tato sablona prepoklada, ze autor posudku zna rozumne system LaTeX a
+% proto vyplnovani posudku probiha formou rozsirovani vlastniho tela
+% dokumentu, nikoliv definici maker pro jednotlive casti jako u jinych
+% podobnych sablon. Jednotlive casti jsou komentovany primo v TeXovem
+% kodu, sablona jako takova je pak schopna graficky zvyraznit chybejici
+% udaje i ve vyslednem PDF souboru.
+%
+% Pred finalnim odevzdanim posudku muze byt vhodne rucne upravit
+% zalamovani stranek. Interni pouziti prostredi longtable zarucuje
+% rozumne chovani ve vetsine pripadu; preciznejsi kontrolu nad mistem
+% zalomeni (typicky pred zacatkem jednotlivych bloku) lze vynutit
+% napr. vlozenim prikazu \pagebreak.
+%
+% Pokud nechcete menit vzhled dokumentu, preskocte nyni na zacatek tela
+% dokumentu, tj. ke znacce \begin{document}.
+%
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8x]{inputenc}
+
+
+
+\usepackage[top=2cm,left=2cm,right=2cm,bottom=2.5cm]{geometry}
+
+\usepackage{xcolor}
+\usepackage{ifthen}
+\usepackage{longtable}
+\usepackage{setspace}
+\usepackage{array}
+\def\arraystretch{1.1}%
+
+\newlength{\myparindent}
+\setlength{\myparindent}{1em}
+
+% Vlastni typy, pro P definujeme odsazeni odstavce.
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{P}[1]{>{%
+\let\newline\\\arraybackslash\hspace{\myparindent}%
+\setlength{\parindent}{\myparindent}%
+\renewcommand\noindent{\hspace{-\myparindent}}}p{#1}
+}
+
+% Zobrazi puvodni misto pouziti makra (radek) ve zdrojovem dokumentu.
+\newcommand\showPosition{{\textcolor{red}{\footnotesize(řádek~\the\inputlineno)}}}
+
+% Zobrazi dany text cervene.
+\newcommand\errorText[1]{{\color{red} \textbf{#1}}}
+
+% Vypise krizek, pokud znamka (parametr 2) je stejna jako parametr #1.
+\newcommand\makeMark[2]{\ifthenelse{\equal{#1}{#2}}{X}{~}}
+
+% Polozka v hlavicce.
+% \field{Jmeno pole}{Hodnota}
+% Pokud je hodnota rovna X, je pole vysviceno jako chybne.
+\newcommand{\field}[2]{
+\ifthenelse{\equal{#2}{X}}{\errorText{#1} & \showPosition}{%
+    \ifthenelse{\equal{#2}{X \hfill Oponent}}{\errorText{#1} & \showPosition \hfill Oponent}{%
+        \ifthenelse{\equal{#2}{X \hfill Vedoucí}}{\errorText{#1} & \showPosition \hfill Vedoucí}{%
+        \textbf{#1}~~ & #2%
+        }%
+    }%
+}%
+ \\
+}
+
+% Hlavicka prace.
+% Predpokladame, ze pouze polozky \field budou uvnitr tohoto prostredi!
+\newenvironment{topmatter}{%
+\begin{center}
+{\Large Posudek bakalářské práce}
+
+\vspace{3mm}
+
+{\large Matematicko-fyzikální fakulta Univerzity Karlovy v Praze}
+\end{center}
+
+\renewcommand\medskip{\\}
+\begin{tabular}{R{4cm}p{9cm}}
+}{%
+\end{tabular}
+
+\vspace{2em}
+
+\begin{spacing}{1.0}
+\footnotesize \noindent \textit{%
+Prosím vyplňte hodnocení křížkem u každého kritéria. Hodnocení OK označuje
+práci, která kritérium vhodným způsobem splňuje. Hodnocení lepší a horší
+označují splnění nad a pod rámec obvyklý pro bakalářskou práci, hodnocení
+nevyhovuje označuje práci, která by neměla být obhájena. Hodnocení v případě
+potřeby doplňte komentářem. Komentář prosím doplňte všude, kde je hodnocení
+jiné než OK.
+}
+\end{spacing}
+
+\vspace{2em}
+}
+
+
+% Vlozi dilci hodnoceni.
+% \grade{Nazev}{Znamka jako cislo 1-4}{Detailnejsi popis}
+\newcommand{\grade}[3]{
+\hspace{-\parindent}%
+\hspace{-3mm}
+\begin{tabular}{p{11.1cm}|C{.8cm}|C{.8cm}|C{.8cm}|C{1.8cm}}
+    \ifthenelse{\equal{#2}{X}}{\color{red} \textbf{#1}}{#1}
+        \hfill
+        \textit{\scriptsize \ifthenelse{\equal{#3}{}}{}{~\ldots$\,$#3}}
+    & \makeMark{1}{#2}
+    & \makeMark{2}{#2}
+    & \makeMark{3}{#2}
+    & \ifthenelse{\equal{#2}{X}}{\showPosition}{\makeMark{4}{#2}}
+    \\
+\end{tabular}
+\\
+\hline%
+}
+
+% Blok s hodnocenim.
+\newenvironment{evaluation}[1]{%
+\noindent
+\begin{tabular}{p{11.1cm}C{.8cm}C{.8cm}C{.8cm}C{1.8cm}}
+\hspace{-2ex} \textbf{#1} & \footnotesize lepší & \footnotesize OK & \footnotesize horší & \footnotesize nevyhovuje
+\end{tabular}
+\vspace{-1.5em}
+\begin{longtable}{|P{17.2cm}|}
+\hline%
+}{%
+\\
+\hline
+\end{longtable}
+}
+
+
+
+% Zaverecna znamka.
+% \finalgrade{Znamka slovne}{Ano/Ne - doporuceni k zvlastnimu oceneni}
+\newcommand{\finalgrade}[2]{
+\begin{tabular}{R{8cm}p{4cm}}
+\field{Celkové hodnocení}{#1}
+\field{Práci navrhuji na zvláštní ocenění}{#2}
+\end{tabular}
+}
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                               %
+%   ZDE zacnete vyplnovat vlastni hodnoceni bakalarske prace.   %
+%                                                               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+% Pouze pokud bude mit vase hodnoceni vice jak 2 stranky, ma smysl
+% zapinat cislovani stranek.
+\pagestyle{empty}
+
+
+
+%
+% Sazba hlavicky posudku
+% ----------------------
+%
+% Vyplnte prislusne udaje misto hodnot X v druhem argumentu makra \field.
+%
+\begin{topmatter}
+
+% Informace o autorovi a jeho studiu
+\field{Autor práce}{X}
+\field{Název práce}{X}
+\field{Rok odevzdání}{X}
+\field{Studijní program}{Informatika}
+\field{Studijní obor}{X}
+
+\medskip
+
+
+\field{Autor posudku}{X \hfill Vedoucí}
+%\field{Autor posudku}{X \hfill Oponent}
+\field{Pracoviště}{X}
+%\field{Pracoviště}{Informatický ústav Univerzity Karlovy}
+%\field{Pracoviště}{Katedra aplikované matematiky}
+%\field{Pracoviště}{Katedra distribuovaných a spolehlivých systémů}
+%\field{Pracoviště}{Katedra softwarového inženýrství}
+%\field{Pracoviště}{Katedra softwaru a výuky informatiky}
+%\field{Pracoviště}{Katedra teoretické informatiky a matematické logiky}
+%\field{Pracoviště}{Středisko informatické sítě a laboratoří}
+%\field{Pracoviště}{Ústav formální a aplikované lingvistiky}
+
+\end{topmatter}
+
+
+
+%
+% Souhrnne hodnocení cele prace
+% -----------------------------
+%
+% Jednotliva hodnocení vyplnte jako cisla 1-4 v druhem argumentu makra
+% \grade (misto znaku X). 1 oznacuje splneni kriteria nad urovni beznou
+% pro bakalarske prace, 2 splneni na obvykle urovni, 3 splneni pod
+% beznou urovni a 4 oznacuje zavazny nedostatek.
+%
+% Slovni komentar vyplnte vzdy, pokud je hodnoceni jine nez "obvykle"
+% splneni (tj. sloupecek OK a zde cislo 2).
+%
+\begin{evaluation}{K celé práci}
+\grade{Obtížnost zadání}{X}{}
+\grade{Splnění zadání}{X}{}
+\grade{Rozsah práce}{X}{textová i implementační část, zohlednění náročnosti}
+
+% Do tohoto mista (pred konec prostredi evaluation) vlozte pripadny
+% slovni komentar.
+\end{evaluation}
+
+
+
+%
+% Hodnoceni textove casti prace
+% -----------------------------
+%
+% Hodnoceni probiha stejnym zpusobem jako v Souhrnnem hodnoceni vyse.
+%
+\begin{evaluation}{Textová část práce}
+\grade{Formální úprava}{X}{jazyková úroveň, typografická úroveň, citace}
+\grade{Struktura textu}{X}{kontext, cíle, analýza, návrh, vyhodnocení, úroveň detailu}
+\grade{Analýza}{X}{}
+\grade{Vývojová dokumentace}{X}{}
+\grade{Uživatelská dokumentace}{X}{}
+
+% Slovni komentar.
+\end{evaluation}
+
+
+
+%
+% Hodnoceni implementacni casti prace
+% -----------------------------------
+%
+% Hodnoceni probiha stejnym zpusobem jako v Souhrnnem hodnoceni vyse.
+%
+\begin{evaluation}{Implementační část práce}
+\grade{Kvalita návrhu}{X}{architektura, struktury a algoritmy, použité technologie}
+\grade{Kvalita zpracování}{X}{jmenné konvence, formátování, komentáře, testování}
+\grade{Stabilita implementace}{X}{}
+
+% Slovni komentar.
+\end{evaluation}
+
+
+
+%
+% Zaverecne hodnoceni - znamka
+% ----------------------------
+%
+% Prvni radek (se znamkou X) slouzi pouze pro upozorneni ve vystupnim
+% souboru. Po vybrani znamky jej smazte nebo zakomentujte.
+%
+% Druhy parametr makra (Ano/Ne) se tyka navrzeni teto prace na zvlastni
+% oceneni.
+%
+\finalgrade{X}{X}
+%\finalgrade{Výborně}{Ano}
+%\finalgrade{Výborně}{Ne}
+%\finalgrade{Velmi dobře}{Ne}
+%\finalgrade{Dobře}{Ne}
+%\finalgrade{Neprospěl(a)}{Ne}
+
+
+%
+% Datum odevzdani posudku
+% -----------------------
+%
+\vspace{2cm}
+Datum:  \hfill Podpis \hspace{5cm}
+
+\end{document}
