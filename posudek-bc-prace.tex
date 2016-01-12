@@ -35,7 +35,6 @@
 \usepackage[utf8x]{inputenc}
 
 
-
 \usepackage[top=2cm,left=2cm,right=2cm,bottom=2.5cm]{geometry}
 
 \usepackage{xcolor}
@@ -81,7 +80,7 @@
 }
 
 % Hlavicka prace.
-% Predpokladame, ze pouze polozky \field budou uvnitr tohoto prostredi!
+% Predpokladame, ze pouze polozky \field budou uvnitr tohoto prostredi.
 \newenvironment{topmatter}{%
 \begin{center}
 {\Large Posudek bakalářské práce}
@@ -95,19 +94,6 @@
 \begin{tabular}{R{4cm}p{9cm}}
 }{%
 \end{tabular}
-
-\vspace{2em}
-
-\begin{spacing}{1.0}
-\footnotesize \noindent \textit{%
-Prosím vyplňte hodnocení křížkem u každého kritéria. Hodnocení OK označuje
-práci, která kritérium vhodným způsobem splňuje. Hodnocení lepší a horší
-označují splnění nad a pod rámec obvyklý pro bakalářskou práci, hodnocení
-nevyhovuje označuje práci, která by neměla být obhájena. Hodnocení v případě
-potřeby doplňte komentářem. Komentář prosím doplňte všude, kde je hodnocení
-jiné než OK.
-}
-\end{spacing}
 
 \vspace{2em}
 }
@@ -132,6 +118,7 @@ jiné než OK.
 \hline%
 }
 
+
 % Blok s hodnocenim.
 \newenvironment{evaluation}[1]{%
 \noindent
@@ -148,7 +135,6 @@ jiné než OK.
 }
 
 
-
 % Zaverecna znamka.
 % \finalgrade{Znamka slovne}{Ano/Ne - doporuceni k zvlastnimu oceneni}
 \newcommand{\finalgrade}[2]{
@@ -159,23 +145,24 @@ jiné než OK.
 }
 
 
-
-
-
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                               %
 %   ZDE zacnete vyplnovat vlastni hodnoceni bakalarske prace.   %
 %                                                               %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Prosím vyplňte hodnocení křížkem u každého kritéria.
+% Hodnocení OK označuje práci, která kritérium vhodným způsobem splňuje.
+% Hodnocení lepší a horší % označují splnění nad a pod rámec obvyklý pro bakalářskou práci.
+% Hodnocení nevyhovuje označuje práci, která by neměla být obhájena.
+% Hodnocení v případě potřeby doplňte komentářem.
+%
+% Komentář prosím doplňte všude, kde je hodnocení jiné než OK.
+%
 \begin{document}
 
-% Pouze pokud bude mit vase hodnoceni vice jak 2 stranky, ma smysl
-% zapinat cislovani stranek.
+% Pouze pokud bude mit vase hodnoceni vice jak 2 stranky, ma smysl zapinat cislovani stranek.
 \pagestyle{empty}
-
 
 
 %
@@ -211,35 +198,30 @@ jiné než OK.
 \end{topmatter}
 
 
-
 %
 % Souhrnne hodnocení cele prace
 % -----------------------------
 %
-% Jednotliva hodnocení vyplnte jako cisla 1-4 v druhem argumentu makra
-% \grade (misto znaku X). 1 oznacuje splneni kriteria nad urovni beznou
-% pro bakalarske prace, 2 splneni na obvykle urovni, 3 splneni pod
-% beznou urovni a 4 oznacuje zavazny nedostatek.
-%
-% Slovni komentar vyplnte vzdy, pokud je hodnoceni jine nez "obvykle"
-% splneni (tj. sloupecek OK a zde cislo 2).
+% Jednotliva hodnocení vyplnte jako cisla 1-4 v druhem argumentu makra \grade (misto znaku X).
+% 1 oznacuje splneni kriteria nad urovni beznou pro bakalarske prace,
+% 2 splneni na obvykle urovni,
+% 3 splneni pod beznou urovni,
+% 4 oznacuje zavazny nedostatek.
 %
 \begin{evaluation}{K celé práci}
 \grade{Obtížnost zadání}{X}{}
 \grade{Splnění zadání}{X}{}
 \grade{Rozsah práce}{X}{textová i implementační část, zohlednění náročnosti}
 
-% Do tohoto mista (pred konec prostredi evaluation) vlozte pripadny
-% slovni komentar.
+% Do tohoto mista (pred konec prostredi evaluation) vlozte slovni komentar.
 \end{evaluation}
-
 
 
 %
 % Hodnoceni textove casti prace
 % -----------------------------
 %
-% Hodnoceni probiha stejnym zpusobem jako v Souhrnnem hodnoceni vyse.
+% Instrukce viz vyse.
 %
 \begin{evaluation}{Textová část práce}
 \grade{Formální úprava}{X}{jazyková úroveň, typografická úroveň, citace}
@@ -252,12 +234,11 @@ jiné než OK.
 \end{evaluation}
 
 
-
 %
 % Hodnoceni implementacni casti prace
 % -----------------------------------
 %
-% Hodnoceni probiha stejnym zpusobem jako v Souhrnnem hodnoceni vyse.
+% Instrukce viz vyse.
 %
 \begin{evaluation}{Implementační část práce}
 \grade{Kvalita návrhu}{X}{architektura, struktury a algoritmy, použité technologie}
@@ -268,16 +249,15 @@ jiné než OK.
 \end{evaluation}
 
 
-
 %
 % Zaverecne hodnoceni - znamka
 % ----------------------------
 %
 % Prvni radek (se znamkou X) slouzi pouze pro upozorneni ve vystupnim
-% souboru. Po vybrani znamky jej smazte nebo zakomentujte.
+% souboru. Po vybrani znamky jej smazte nebo zakomentujte. Ke znamce
+% je mozne pripsat formulace jako "spíše lepší" či "spíše horší".
 %
-% Druhy parametr makra (Ano/Ne) se tyka navrzeni teto prace na zvlastni
-% oceneni.
+% Druhy parametr makra (Ano/Ne) se tyka navrzeni teto prace na zvlastni oceneni.
 %
 \finalgrade{X}{X}
 %\finalgrade{Výborně}{Ano}
@@ -291,7 +271,7 @@ jiné než OK.
 % Datum odevzdani posudku
 % -----------------------
 %
-\vspace{2cm}
-Datum:  \hfill Podpis \hspace{5cm}
+\vspace{2em}
+Datum \hfill Podpis \hspace{5cm}
 
 \end{document}

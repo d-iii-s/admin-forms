@@ -1,8 +1,6 @@
-Šablona pro posudky bakalářských prací oboru Informatika na MFF UK
-==================================================================
+# Formuláře
 
-LaTeXová šablona je k dispozici v souboru `posudek-bc-prace.tex`,
-pro jeho stažení zvolte formát *Raw*.
+## Posudky bakalářských prací
 
-Pokyny k vyplnění šablony jsou přímo součástí zdrojového souboru jako
-komentáře.
+LaTeXová šablona je k dispozici v souboru `posudek-bc-prace.tex`, pro jeho stažení zvolte formát *raw*.
+Pokyny k vyplnění šablony jsou součástí zdrojového souboru jako komentáře.
