@@ -34,13 +34,16 @@
 
 \usepackage[utf8x]{inputenc}
 
+% Volba jazyka formulare, CZ nebo EN.
+\usepackage[CZ]{optional}
 
 \usepackage[top=2cm,left=2cm,right=2cm,bottom=2.5cm]{geometry}
 
-\usepackage{xcolor}
 \usepackage{ifthen}
-\usepackage{longtable}
+\usepackage{xcolor}
 \usepackage{setspace}
+\usepackage{longtable}
+
 \usepackage{array}
 \def\arraystretch{1.1}%
 
@@ -83,11 +86,13 @@
 % Predpokladame, ze pouze polozky \field budou uvnitr tohoto prostredi.
 \newenvironment{topmatter}{%
 \begin{center}
-{\Large Posudek bakalářské práce}
+\opt{CZ}{\Large Posudek bakalářské práce}
+\opt{EN}{\Large Bachelor Thesis Review}
 
 \vspace{3mm}
 
-{\large Matematicko-fyzikální fakulta Univerzity Karlovy v Praze}
+\opt{CZ}{\large Matematicko-fyzikální fakulta Univerzity Karlovy v Praze}
+\opt{EN}{\large Faculty of Mathematics and Physics, Charles University in Prague}
 \end{center}
 
 \renewcommand\medskip{\\}
@@ -123,7 +128,7 @@
 \newenvironment{evaluation}[1]{%
 \noindent
 \begin{tabular}{p{11.1cm}C{.8cm}C{.8cm}C{.8cm}C{1.8cm}}
-\hspace{-2ex} \textbf{#1} & \footnotesize lepší & \footnotesize OK & \footnotesize horší & \footnotesize nevyhovuje
+\hspace{-2ex} \textbf{#1} & \footnotesize \opt{CZ}{lepší}\opt{EN}{good} & \footnotesize OK & \footnotesize \opt{CZ}{horší}\opt{EN}{poor} & \footnotesize \opt{CZ}{nevyhovuje}\opt{EN}{insufficient}
 \end{tabular}
 \vspace{-1.5em}
 \begin{longtable}{|P{17.2cm}|}
@@ -139,8 +144,10 @@
 % \finalgrade{Znamka slovne}{Ano/Ne - doporuceni k zvlastnimu oceneni}
 \newcommand{\finalgrade}[2]{
 \begin{tabular}{R{8cm}p{4cm}}
-\field{Celkové hodnocení}{#1}
-\field{Práci navrhuji na zvláštní ocenění}{#2}
+\opt{CZ}{\field{Celkové hodnocení}{#1}}
+\opt{EN}{\field{Overall grade}{#1}}
+\opt{CZ}{\field{Práci navrhuji na zvláštní ocenění}{#2}}
+\opt{EN}{\field{Award level thesis}{#2}}
 \end{tabular}
 }
 
@@ -153,7 +160,7 @@
 %
 % Prosím vyplňte hodnocení křížkem u každého kritéria.
 % Hodnocení OK označuje práci, která kritérium vhodným způsobem splňuje.
-% Hodnocení lepší a horší % označují splnění nad a pod rámec obvyklý pro bakalářskou práci.
+% Hodnocení lepší a horší označují splnění nad a pod rámec obvyklý pro bakalářskou práci.
 % Hodnocení nevyhovuje označuje práci, která by neměla být obhájena.
 % Hodnocení v případě potřeby doplňte komentářem.
 %
@@ -174,15 +181,24 @@
 \begin{topmatter}
 
 % Informace o autorovi a jeho studiu
+\opt{CZ}{
 \field{Autor práce}{X}
 \field{Název práce}{X}
 \field{Rok odevzdání}{X}
 \field{Studijní program}{Informatika}
 \field{Studijní obor}{X}
+}
+\opt{EN}{
+\field{Thesis author}{X}
+\field{Thesis title}{X}
+\field{Year submitted}{X}
+\field{Study program}{Computer Science}
+\field{Study branch}{X}
+}
 
 \medskip
 
-
+\opt{CZ}{
 \field{Autor posudku}{X \hfill Vedoucí}
 %\field{Autor posudku}{X \hfill Oponent}
 \field{Pracoviště}{X}
@@ -194,6 +210,13 @@
 %\field{Pracoviště}{Katedra teoretické informatiky a matematické logiky}
 %\field{Pracoviště}{Středisko informatické sítě a laboratoří}
 %\field{Pracoviště}{Ústav formální a aplikované lingvistiky}
+}
+
+\opt{EN}{
+\field{Review author}{X \hfill Advisor}
+%\field{Review author}{X \hfill Reviewer}
+\field{Department}{X}
+}
 
 \end{topmatter}
 
@@ -208,6 +231,7 @@
 % 3 splneni pod beznou urovni,
 % 4 oznacuje zavazny nedostatek.
 %
+\opt{CZ}{
 \begin{evaluation}{K celé práci}
 \grade{Obtížnost zadání}{X}{}
 \grade{Splnění zadání}{X}{}
@@ -215,6 +239,17 @@
 
 % Do tohoto mista (pred konec prostredi evaluation) vlozte slovni komentar.
 \end{evaluation}
+}
+
+\opt{EN}{
+\begin{evaluation}{Overall}
+\grade{Assignment difficulty}{X}{}
+\grade{Assignment fulfilled}{X}{}
+\grade{Total size}{X}{text and code, overall workload}
+
+% Do tohoto mista (pred konec prostredi evaluation) vlozte slovni komentar.
+\end{evaluation}
+}
 
 
 %
@@ -223,6 +258,7 @@
 %
 % Instrukce viz vyse.
 %
+\opt{CZ}{
 \begin{evaluation}{Textová část práce}
 \grade{Formální úprava}{X}{jazyková úroveň, typografická úroveň, citace}
 \grade{Struktura textu}{X}{kontext, cíle, analýza, návrh, vyhodnocení, úroveň detailu}
@@ -232,6 +268,19 @@
 
 % Slovni komentar.
 \end{evaluation}
+}
+
+\opt{EN}{
+\begin{evaluation}{Thesis Text}
+\grade{Form}{X}{language, typography, references}
+\grade{Structure}{X}{context, goals, analysis, design, evaluation, level of detail}
+\grade{Problem analysis}{X}{}
+\grade{Developer documentation}{X}{}
+\grade{User documentation}{X}{}
+
+% Slovni komentar.
+\end{evaluation}
+}
 
 
 %
@@ -240,6 +289,7 @@
 %
 % Instrukce viz vyse.
 %
+\opt{CZ}{
 \begin{evaluation}{Implementační část práce}
 \grade{Kvalita návrhu}{X}{architektura, struktury a algoritmy, použité technologie}
 \grade{Kvalita zpracování}{X}{jmenné konvence, formátování, komentáře, testování}
@@ -247,6 +297,17 @@
 
 % Slovni komentar.
 \end{evaluation}
+}
+
+\opt{EN}{
+\begin{evaluation}{Thesis Code}
+\grade{Design}{X}{architecture, algorithms, data structures, used technologies}
+\grade{Implementation}{X}{naming conventions, formatting, comments, testing}
+\grade{Stability}{X}{}
+
+% Slovni komentar.
+\end{evaluation}
+}
 
 
 %
@@ -272,6 +333,7 @@
 % -----------------------
 %
 \vspace{2em}
-Datum \hfill Podpis \hspace{5cm}
+\opt{CZ}{Datum \hfill Podpis \hspace{5cm}}
+\opt{EN}{Date \hfill Signature \hspace{5cm}}
 
 \end{document}
