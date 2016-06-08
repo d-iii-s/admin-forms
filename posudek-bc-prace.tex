@@ -60,7 +60,7 @@
 }
 
 % Zobrazi puvodni misto pouziti makra (radek) ve zdrojovem dokumentu.
-\newcommand\showPosition{{\textcolor{red}{\footnotesize(řádek~\the\inputlineno)}}}
+\newcommand\showPosition{{\textcolor{red}{\footnotesize(\opt{CZ}{řádek}\opt{EN}{line}~\the\inputlineno)}}}
 
 % Zobrazi dany text cervene.
 \newcommand\errorText[1]{{\color{red} \textbf{#1}}}
@@ -75,7 +75,11 @@
 \ifthenelse{\equal{#2}{X}}{\errorText{#1} & \showPosition}{%
     \ifthenelse{\equal{#2}{X \hfill Oponent}}{\errorText{#1} & \showPosition \hfill Oponent}{%
         \ifthenelse{\equal{#2}{X \hfill Vedoucí}}{\errorText{#1} & \showPosition \hfill Vedoucí}{%
-        \textbf{#1}~~ & #2%
+            \ifthenelse{\equal{#2}{X \hfill Advisor}}{\errorText{#1} & \showPosition \hfill Advisor}{%
+                \ifthenelse{\equal{#2}{X \hfill Reviewer}}{\errorText{#1} & \showPosition \hfill Reviewer}{%
+                    \textbf{#1}~~ & #2%
+                }%
+            }%
         }%
     }%
 }%
