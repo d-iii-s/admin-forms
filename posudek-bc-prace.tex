@@ -41,6 +41,7 @@
 
 \usepackage{ifthen}
 \usepackage{xcolor}
+\usepackage{xstring}
 \usepackage{setspace}
 \usepackage{longtable}
 
@@ -70,20 +71,10 @@
 
 % Polozka v hlavicce.
 % \field{Jmeno pole}{Hodnota}
-% Pokud je hodnota rovna X, je pole vysviceno jako chybne.
+% Pokud hodnota zacina na !, je pole vysviceno jako chybne.
 \newcommand{\field}[2]{
-\ifthenelse{\equal{#2}{X}}{\errorText{#1} & \showPosition}{%
-    \ifthenelse{\equal{#2}{X \hfill Oponent}}{\errorText{#1} & \showPosition \hfill Oponent}{%
-        \ifthenelse{\equal{#2}{X \hfill Vedoucí}}{\errorText{#1} & \showPosition \hfill Vedoucí}{%
-            \ifthenelse{\equal{#2}{X \hfill Advisor}}{\errorText{#1} & \showPosition \hfill Advisor}{%
-                \ifthenelse{\equal{#2}{X \hfill Reviewer}}{\errorText{#1} & \showPosition \hfill Reviewer}{%
-                    \textbf{#1}~~ & #2%
-                }%
-            }%
-        }%
-    }%
-}%
- \\
+\StrLeft{#2}{1}[\first]
+\IfStrEq{\first}{!}{\errorText{#1} & \showPosition}{\textbf{#1}~~ & #2} \\
 }
 
 % Hlavicka prace.
@@ -114,13 +105,13 @@
 \hspace{-\parindent}%
 \hspace{-3mm}
 \begin{tabular}{p{11.1cm}|C{.8cm}|C{.8cm}|C{.8cm}|C{1.8cm}}
-    \ifthenelse{\equal{#2}{X}}{\color{red} \textbf{#1}}{#1}
+    \ifthenelse{\equal{#2}{!}}{\color{red} \textbf{#1}}{#1}
         \hfill
         \textit{\scriptsize \ifthenelse{\equal{#3}{}}{}{~\ldots$\,$#3}}
     & \makeMark{1}{#2}
     & \makeMark{2}{#2}
     & \makeMark{3}{#2}
-    & \ifthenelse{\equal{#2}{X}}{\showPosition}{\makeMark{4}{#2}}
+    & \ifthenelse{\equal{#2}{!}}{\showPosition}{\makeMark{4}{#2}}
     \\
 \end{tabular}
 \\
@@ -180,32 +171,32 @@
 % Sazba hlavicky posudku
 % ----------------------
 %
-% Vyplnte prislusne udaje misto hodnot X v druhem argumentu makra \field.
+% Vyplnte prislusne udaje misto hodnot ! v druhem argumentu makra \field.
 %
 \begin{topmatter}
 
 % Informace o autorovi a jeho studiu
 \opt{CZ}{
-\field{Autor práce}{X}
-\field{Název práce}{X}
-\field{Rok odevzdání}{X}
+\field{Autor práce}{!}
+\field{Název práce}{!}
+\field{Rok odevzdání}{!}
 \field{Studijní program}{Informatika}
-\field{Studijní obor}{X}
+\field{Studijní obor}{!}
 }
 \opt{EN}{
-\field{Thesis author}{X}
-\field{Thesis title}{X}
-\field{Year submitted}{X}
+\field{Thesis author}{!}
+\field{Thesis title}{!}
+\field{Year submitted}{!}
 \field{Study program}{Computer Science}
-\field{Study branch}{X}
+\field{Study branch}{!}
 }
 
 \medskip
 
 \opt{CZ}{
-\field{Autor posudku}{X \hfill Vedoucí}
-%\field{Autor posudku}{X \hfill Oponent}
-\field{Pracoviště}{X}
+\field{Autor posudku}{! \hfill Vedoucí}
+%\field{Autor posudku}{! \hfill Oponent}
+\field{Pracoviště}{!}
 %\field{Pracoviště}{Informatický ústav Univerzity Karlovy}
 %\field{Pracoviště}{Katedra aplikované matematiky}
 %\field{Pracoviště}{Katedra distribuovaných a spolehlivých systémů}
@@ -217,9 +208,9 @@
 }
 
 \opt{EN}{
-\field{Review author}{X \hfill Advisor}
-%\field{Review author}{X \hfill Reviewer}
-\field{Department}{X}
+\field{Review author}{! \hfill Advisor}
+%\field{Review author}{! \hfill Reviewer}
+\field{Department}{!}
 }
 
 \end{topmatter}
@@ -237,9 +228,9 @@
 %
 \opt{CZ}{
 \begin{evaluation}{K celé práci}
-\grade{Obtížnost zadání}{X}{}
-\grade{Splnění zadání}{X}{}
-\grade{Rozsah práce}{X}{textová i implementační část, zohlednění náročnosti}
+\grade{Obtížnost zadání}{!}{}
+\grade{Splnění zadání}{!}{}
+\grade{Rozsah práce}{!}{textová i implementační část, zohlednění náročnosti}
 
 % Do tohoto mista (pred konec prostredi evaluation) vlozte slovni komentar.
 \end{evaluation}
@@ -247,9 +238,9 @@
 
 \opt{EN}{
 \begin{evaluation}{Overall}
-\grade{Assignment difficulty}{X}{}
-\grade{Assignment fulfilled}{X}{}
-\grade{Total size}{X}{text and code, overall workload}
+\grade{Assignment difficulty}{!}{}
+\grade{Assignment fulfilled}{!}{}
+\grade{Total size}{!}{text and code, overall workload}
 
 % Do tohoto mista (pred konec prostredi evaluation) vlozte slovni komentar.
 \end{evaluation}
@@ -264,11 +255,11 @@
 %
 \opt{CZ}{
 \begin{evaluation}{Textová část práce}
-\grade{Formální úprava}{X}{jazyková úroveň, typografická úroveň, citace}
-\grade{Struktura textu}{X}{kontext, cíle, analýza, návrh, vyhodnocení, úroveň detailu}
-\grade{Analýza}{X}{}
-\grade{Vývojová dokumentace}{X}{}
-\grade{Uživatelská dokumentace}{X}{}
+\grade{Formální úprava}{!}{jazyková úroveň, typografická úroveň, citace}
+\grade{Struktura textu}{!}{kontext, cíle, analýza, návrh, vyhodnocení, úroveň detailu}
+\grade{Analýza}{!}{}
+\grade{Vývojová dokumentace}{!}{}
+\grade{Uživatelská dokumentace}{!}{}
 
 % Slovni komentar.
 \end{evaluation}
@@ -276,11 +267,11 @@
 
 \opt{EN}{
 \begin{evaluation}{Thesis Text}
-\grade{Form}{X}{language, typography, references}
-\grade{Structure}{X}{context, goals, analysis, design, evaluation, level of detail}
-\grade{Problem analysis}{X}{}
-\grade{Developer documentation}{X}{}
-\grade{User documentation}{X}{}
+\grade{Form}{!}{language, typography, references}
+\grade{Structure}{!}{context, goals, analysis, design, evaluation, level of detail}
+\grade{Problem analysis}{!}{}
+\grade{Developer documentation}{!}{}
+\grade{User documentation}{!}{}
 
 % Slovni komentar.
 \end{evaluation}
@@ -295,9 +286,9 @@
 %
 \opt{CZ}{
 \begin{evaluation}{Implementační část práce}
-\grade{Kvalita návrhu}{X}{architektura, struktury a algoritmy, použité technologie}
-\grade{Kvalita zpracování}{X}{jmenné konvence, formátování, komentáře, testování}
-\grade{Stabilita implementace}{X}{}
+\grade{Kvalita návrhu}{!}{architektura, struktury a algoritmy, použité technologie}
+\grade{Kvalita zpracování}{!}{jmenné konvence, formátování, komentáře, testování}
+\grade{Stabilita implementace}{!}{}
 
 % Slovni komentar.
 \end{evaluation}
@@ -305,9 +296,9 @@
 
 \opt{EN}{
 \begin{evaluation}{Thesis Code}
-\grade{Design}{X}{architecture, algorithms, data structures, used technologies}
-\grade{Implementation}{X}{naming conventions, formatting, comments, testing}
-\grade{Stability}{X}{}
+\grade{Design}{!}{architecture, algorithms, data structures, used technologies}
+\grade{Implementation}{!}{naming conventions, formatting, comments, testing}
+\grade{Stability}{!}{}
 
 % Slovni komentar.
 \end{evaluation}
@@ -324,7 +315,7 @@
 %
 % Druhy parametr makra (Ano/Ne) se tyka navrzeni teto prace na zvlastni oceneni.
 %
-\finalgrade{X}{X}
+\finalgrade{!}{!}
 %\finalgrade{Výborně}{Ano}
 %\finalgrade{Výborně}{Ne}
 %\finalgrade{Velmi dobře}{Ne}
