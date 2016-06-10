@@ -176,42 +176,26 @@
 \begin{topmatter}
 
 % Informace o autorovi a jeho studiu
-\opt{CZ}{
-\field{Autor práce}{!}
-\field{Název práce}{!}
-\field{Rok odevzdání}{!}
-\field{Studijní program}{Informatika}
-\field{Studijní obor}{!}
-}
-\opt{EN}{
-\field{Thesis author}{!}
-\field{Thesis title}{!}
-\field{Year submitted}{!}
-\field{Study program}{Computer Science}
-\field{Study branch}{!}
-}
+\field{\opt{CZ}{Autor práce}\opt{EN}{Thesis author}}{!}
+\field{\opt{CZ}{Název práce}\opt{EN}{Thesis title}}{!}
+\field{\opt{CZ}{Rok odevzdání}\opt{EN}{Year submitted}}{!}
+\field{\opt{CZ}{Studijní program}\opt{EN}{Study program}}{\opt{CZ}{Informatika}\opt{EN}{Computer Science}}
+\field{\opt{CZ}{Studijní obor}\opt{EN}{Study branch}}{!}
 
 \medskip
 
-\opt{CZ}{
-\field{Autor posudku}{! \hfill Vedoucí}
-%\field{Autor posudku}{! \hfill Oponent}
-\field{Pracoviště}{!}
-%\field{Pracoviště}{Informatický ústav Univerzity Karlovy}
-%\field{Pracoviště}{Katedra aplikované matematiky}
-%\field{Pracoviště}{Katedra distribuovaných a spolehlivých systémů}
-%\field{Pracoviště}{Katedra softwarového inženýrství}
-%\field{Pracoviště}{Katedra softwaru a výuky informatiky}
-%\field{Pracoviště}{Katedra teoretické informatiky a matematické logiky}
-%\field{Pracoviště}{Středisko informatické sítě a laboratoří}
-%\field{Pracoviště}{Ústav formální a aplikované lingvistiky}
-}
 
-\opt{EN}{
-\field{Review author}{! \hfill Advisor}
-%\field{Review author}{! \hfill Reviewer}
-\field{Department}{!}
-}
+\field{\opt{CZ}{Autor posudku}\opt{EN}{Review author}}{! \hfill \opt{CZ}{Vedoucí}\opt{EN}{Advisor}}
+%\field{\opt{CZ}{Autor posudku}\opt{EN}{Review author}}{! \hfill \opt{CZ}{Oponent}\opt{EN}{Reviewer}}
+\field{\opt{CZ}{Pracoviště}\opt{EN}{Department}}{!}
+%\field{\opt{CZ}{Pracoviště}\opt{EN}{Department}}{Informatický ústav Univerzity Karlovy}
+%\field{\opt{CZ}{Pracoviště}\opt{EN}{Department}}{Katedra aplikované matematiky}
+%\field{\opt{CZ}{Pracoviště}\opt{EN}{Department}}{Katedra distribuovaných a spolehlivých systémů}
+%\field{\opt{CZ}{Pracoviště}\opt{EN}{Department}}{Katedra softwarového inženýrství}
+%\field{\opt{CZ}{Pracoviště}\opt{EN}{Department}}{Katedra softwaru a výuky informatiky}
+%\field{\opt{CZ}{Pracoviště}\opt{EN}{Department}}{Katedra teoretické informatiky a matematické logiky}
+%\field{\opt{CZ}{Pracoviště}\opt{EN}{Department}}{Středisko informatické sítě a laboratoří}
+%\field{\opt{CZ}{Pracoviště}\opt{EN}{Department}}{Ústav formální a aplikované lingvistiky}
 
 \end{topmatter}
 
@@ -220,31 +204,19 @@
 % Souhrnne hodnocení cele prace
 % -----------------------------
 %
-% Jednotliva hodnocení vyplnte jako cisla 1-4 v druhem argumentu makra \grade (misto znaku X).
+% Jednotliva hodnocení vyplnte jako cisla 1-4 v druhem argumentu makra \grade (misto znaku !).
 % 1 oznacuje splneni kriteria nad urovni beznou pro bakalarske prace,
 % 2 splneni na obvykle urovni,
 % 3 splneni pod beznou urovni,
 % 4 oznacuje zavazny nedostatek.
 %
-\opt{CZ}{
-\begin{evaluation}{K celé práci}
-\grade{Obtížnost zadání}{!}{}
-\grade{Splnění zadání}{!}{}
-\grade{Rozsah práce}{!}{textová i implementační část, zohlednění náročnosti}
+\begin{evaluation}{\opt{CZ}{K celé práci}\opt{EN}{Overall}}
+\grade{\opt{CZ}{Obtížnost zadání}\opt{EN}{Assignment difficulty}}{!}{}
+\grade{\opt{CZ}{Splnění zadání}\opt{EN}{Assignment fulfilled}}{!}{}
+\grade{\opt{CZ}{Rozsah práce}\opt{EN}{Total size}}{!}{\opt{CZ}{textová i implementační část, zohlednění náročnosti}\opt{EN}{text and code, overall workload}}
 
 % Do tohoto mista (pred konec prostredi evaluation) vlozte slovni komentar.
 \end{evaluation}
-}
-
-\opt{EN}{
-\begin{evaluation}{Overall}
-\grade{Assignment difficulty}{!}{}
-\grade{Assignment fulfilled}{!}{}
-\grade{Total size}{!}{text and code, overall workload}
-
-% Do tohoto mista (pred konec prostredi evaluation) vlozte slovni komentar.
-\end{evaluation}
-}
 
 
 %
@@ -253,29 +225,15 @@
 %
 % Instrukce viz vyse.
 %
-\opt{CZ}{
-\begin{evaluation}{Textová část práce}
-\grade{Formální úprava}{!}{jazyková úroveň, typografická úroveň, citace}
-\grade{Struktura textu}{!}{kontext, cíle, analýza, návrh, vyhodnocení, úroveň detailu}
-\grade{Analýza}{!}{}
-\grade{Vývojová dokumentace}{!}{}
-\grade{Uživatelská dokumentace}{!}{}
+\begin{evaluation}{\opt{CZ}{Textová část práce}\opt{EN}{Thesis Text}}
+\grade{\opt{CZ}{Formální úprava}\opt{EN}{Form}}{!}{\opt{CZ}{jazyková úroveň, typografická úroveň, citace}\opt{EN}{language, typography, references}}
+\grade{\opt{CZ}{Struktura textu}\opt{EN}{Structure}}{!}{\opt{CZ}{kontext, cíle, analýza, návrh, vyhodnocení, úroveň detailu}\opt{EN}{context, goals, analysis, design, evaluation, level of detail}}
+\grade{\opt{CZ}{Analýza}\opt{EN}{Problem analysis}}{!}{\opt{CZ}{}\opt{EN}{}}
+\grade{\opt{CZ}{Vývojová dokumentace}\opt{EN}{Developer documentation}}{!}{\opt{CZ}{}\opt{EN}{}}
+\grade{\opt{CZ}{Uživatelská dokumentace}\opt{EN}{User Documentation}}{!}{\opt{CZ}{}\opt{EN}{}}
 
 % Slovni komentar.
 \end{evaluation}
-}
-
-\opt{EN}{
-\begin{evaluation}{Thesis Text}
-\grade{Form}{!}{language, typography, references}
-\grade{Structure}{!}{context, goals, analysis, design, evaluation, level of detail}
-\grade{Problem analysis}{!}{}
-\grade{Developer documentation}{!}{}
-\grade{User documentation}{!}{}
-
-% Slovni komentar.
-\end{evaluation}
-}
 
 
 %
@@ -284,32 +242,20 @@
 %
 % Instrukce viz vyse.
 %
-\opt{CZ}{
-\begin{evaluation}{Implementační část práce}
-\grade{Kvalita návrhu}{!}{architektura, struktury a algoritmy, použité technologie}
-\grade{Kvalita zpracování}{!}{jmenné konvence, formátování, komentáře, testování}
-\grade{Stabilita implementace}{!}{}
+\begin{evaluation}{\opt{CZ}{Implementační část práce}\opt{EN}{Thesis Code}}
+\grade{\opt{CZ}{Kvalita návrhu}\opt{EN}{Design}}{!}{\opt{CZ}{architektura, struktury a algoritmy, použité technologie}\opt{EN}{architecture, algorithms, data structures, used technologies}}
+\grade{\opt{CZ}{Kvalita zpracování}\opt{EN}{Implementation}}{!}{\opt{CZ}{jmenné konvence, formátování, komentáře, testování}\opt{EN}{naming conventions, formatting, comments, testing}}
+\grade{\opt{CZ}{Stabilita implementace}\opt{EN}{Stability}}{!}{\opt{CZ}{}\opt{EN}{}}
 
 % Slovni komentar.
 \end{evaluation}
-}
-
-\opt{EN}{
-\begin{evaluation}{Thesis Code}
-\grade{Design}{!}{architecture, algorithms, data structures, used technologies}
-\grade{Implementation}{!}{naming conventions, formatting, comments, testing}
-\grade{Stability}{!}{}
-
-% Slovni komentar.
-\end{evaluation}
-}
 
 
 %
 % Zaverecne hodnoceni - znamka
 % ----------------------------
 %
-% Prvni radek (se znamkou X) slouzi pouze pro upozorneni ve vystupnim
+% Prvni radek (se znamkou !) slouzi pouze pro upozorneni ve vystupnim
 % souboru. Po vybrani znamky jej smazte nebo zakomentujte. Ke znamce
 % je mozne pripsat formulace jako "spíše lepší" či "spíše horší".
 %
@@ -321,6 +267,11 @@
 %\finalgrade{Velmi dobře}{Ne}
 %\finalgrade{Dobře}{Ne}
 %\finalgrade{Neprospěl(a)}{Ne}
+%\finalgrade{Excellent}{Yes}
+%\finalgrade{Excellent}{No}
+%\finalgrade{Very Good}{No}
+%\finalgrade{Good}{No}
+%\finalgrade{Failed}{No}
 
 
 %
