@@ -27,6 +27,8 @@
 % zalomeni (typicky pred zacatkem jednotlivych bloku) lze vynutit
 % napr. vlozenim prikazu \pagebreak.
 %
+% V prostredi evaluation je tez k dispozici prikaz \evalbreak
+%
 % Pokud nechcete menit vzhled dokumentu, preskocte nyni na zacatek tela
 % dokumentu, tj. ke znacce \begin{document}.
 %
@@ -133,6 +135,9 @@
 \hline
 \end{longtable}
 }
+
+% Vytvoreni mista pro zalomeni stranky
+\newcommand\evalbreak{\\\noindent{\small\emph{(pokračování na další straně)}}\\\hline}
 
 
 % Zaverecna znamka.
