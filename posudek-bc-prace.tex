@@ -70,8 +70,8 @@
 % Zobrazi dany text cervene.
 \newcommand\errorText[1]{{\color{red} \textbf{#1}}}
 
-% Vypise krizek, pokud znamka (parametr 2) je stejna jako parametr #1.
-\newcommand\makeMark[2]{\ifthenelse{\equal{#1}{#2}}{X}{~}}
+% Vypise krizek, pokud alespon jedna znamka (parametr 2) je stejna jako parametr #1 (cislo policka)
+\newcommand\makeMark[2]{\IfSubStr{#2}{#1}{X}{~}}
 
 % Polozka v hlavicce.
 % \field{Jmeno pole}{Hodnota}
@@ -216,6 +216,8 @@
 % 2 splneni na obvykle urovni,
 % 3 splneni pod beznou urovni,
 % 4 oznacuje zavazny nedostatek.
+%
+% Je mozne vyplnit misto jednoho cisla i vice cisel (napr. '12', v takovem pripade je znamka mezi lepsi a OK)
 %
 \begin{evaluation}{\opt{CZ}{K celé práci}\opt{EN}{Overall}}
 \grade{\opt{CZ}{Obtížnost zadání}\opt{EN}{Assignment difficulty}}{!}{}
