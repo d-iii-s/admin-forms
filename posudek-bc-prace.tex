@@ -29,12 +29,23 @@
 %
 % V prostredi evaluation je tez k dispozici prikaz \evalbreak
 %
-% Pokud nechcete menit vzhled dokumentu, preskocte nyni na zacatek tela
-% dokumentu, tj. ke znacce \begin{document}.
-%
+% Nize vyplnte metadata nutna pro generovani formatu PDF/A-2u a pokud nechcete
+% menit vzhled dokumentu, preskocte na zacatek tela dokumentu, tj. ke znacce
+% \begin{document}.
+
+%%% Metadata dokumentu pro PDF/A-2u
+\begin{filecontents*}{\jobname.xmpdata}
+	\Author{JMENO AUTORA POSUDKU}
+	\Title{Posudek bakalářské práce: AUTOR PRACE - NAZEV PRACE}
+	\Publisher{Charles University}
+\end{filecontents*}
+%%%
+
 \documentclass[12pt,a4paper]{article}
 
 \usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[a-2u]{pdfx}
 
 % Volba jazyka formulare, CZ nebo EN.
 \usepackage[CZ]{optional}
